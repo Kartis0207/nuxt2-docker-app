@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  node:
+    container_name: "nuxt2-web"
+    build:
+      # keep current dicectry 現在のディレクトリを保持
+      context: .
+      # root of exec dockerfile 実行するDockerfileのルート
+      dockerfile: ./node/Dockerfile
+    volumes:
+      - ./src:/root/src
+    working_dir: /root/src/app
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - '3000:3000'
+    command: npm run dev
